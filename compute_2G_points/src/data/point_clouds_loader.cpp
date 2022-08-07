@@ -429,7 +429,7 @@ void PointCloudLoader::spawnLoader(){
 				result = load_pointcloud_from_file(task.lasfile, task.firstPoint, task.numPoints);
 			}
 			UploadTask uploadTask;
-			uploadTask.lasfile = task.lasfile;
+			uploadTask.pointcloud = task.lasfile;
 			uploadTask.sparse_pointOffset = result->sparse_pointOffset;
 			uploadTask.numPoints = task.numPoints;
 			uploadTask.numBatches = result->numBatches;
@@ -501,6 +501,6 @@ void PointCloudLoader::process(){
 
 	this->numBatchesLoaded += task.numBatches;
 	this->numPointsLoaded += task.numPoints;
-	task.lasfile->numPointsLoaded += task.numPoints;
+	task.pointcloud->numPointsLoaded += task.numPoints;
 
 }

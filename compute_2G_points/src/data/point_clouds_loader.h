@@ -78,7 +78,7 @@ struct PointCloudLoader {
 	};
 
 	struct UploadTask{
-		shared_ptr<PointCloud> lasfile;
+		shared_ptr<PointCloud> pointcloud;
 		int64_t sparse_pointOffset;
 		int64_t sparse_batchOffset;
 		int64_t numPoints;
