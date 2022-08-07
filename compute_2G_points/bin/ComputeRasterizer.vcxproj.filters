@@ -14,9 +14,6 @@
     <ClCompile Include="..\src\OrbitControls.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GLTimerQueries.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Framebuffer.cpp">
       <Filter>source</Filter>
     </ClCompile>
@@ -44,9 +41,6 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Frustum.h">
-      <Filter>headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\GLTimerQueries.h">
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Plane.h">

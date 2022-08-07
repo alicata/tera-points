@@ -23,7 +23,7 @@
 #include "Camera.h"
 #include "Frustum.h"
 #include "Renderer.h"
-#include "GLTimerQueries.h"
+//#include "GLTimerQueries.h"
 #include "data/point_clouds_loader.h"
 
 using namespace std;
@@ -113,8 +113,6 @@ struct ComputeLoop : public Method{
 	}
 
 	void render(Renderer* renderer) {
-		GLTimerQueries::timestamp("compute-loop-start");
-
 		pc->process();
 
 		if(pc->numPointsLoaded == 0){
@@ -125,12 +123,10 @@ struct ComputeLoop : public Method{
 
 		// resize framebuffer storage, if necessary
 		if(ssFramebuffer.size < 8 * fbo->width * fbo->height){
-			
 			glDeleteBuffers(1, &ssFramebuffer.handle);
 
 			// make new buffer a little larger to have some reserves when users enlarge the window
 			int newBufferSize = 1.5 * double(8 * fbo->width * fbo->height);
-
 			ssFramebuffer = renderer->createBuffer(newBufferSize);
 		}
 
@@ -205,8 +201,6 @@ struct ComputeLoop : public Method{
 		
 		// RENDER
 		if(csRender->program != -1){
-			GLTimerQueries::timestamp("draw-start");
-
 			glUseProgram(csRender->program);
 
 			auto& viewLeft = renderer->views[0];
@@ -230,14 +224,10 @@ struct ComputeLoop : public Method{
 			int numBatches = pc->numBatchesLoaded;
 			
 			glDispatchCompute(numBatches, 1, 1);
-
-			GLTimerQueries::timestamp("draw-end");
 		}
 
 		// RESOLVE
 		if(csResolve->program != -1){
-			GLTimerQueries::timestamp("resolve-start");
-
 			glUseProgram(csResolve->program);
 			
 			glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, ssFramebuffer.handle);
@@ -250,8 +240,6 @@ struct ComputeLoop : public Method{
 			int groups_x = ceil(float(fbo->width) / 16.0f);
 			int groups_y = ceil(float(fbo->height) / 16.0f);
 			glDispatchCompute(groups_x, groups_y, 1);
-
-			GLTimerQueries::timestamp("resolve-end");
 		}
 
 		// READ DEBUG VALUES
@@ -293,12 +281,8 @@ struct ComputeLoop : public Method{
 			glClearNamedBufferSubData(ssFramebuffer.handle, GL_R32UI, 0, fbo->width * fbo->height * 8, GL_RED, GL_UNSIGNED_INT, &intbits);
 			glClearNamedBufferData(ssDebug.handle, GL_R32UI, GL_RED, GL_UNSIGNED_INT, &zero);
 			glClearNamedBufferSubData(ssBoundingBoxes.handle, GL_R32UI, 0, 48, GL_RED, GL_UNSIGNED_INT, &zero);
-
 			glMemoryBarrier(GL_ALL_BARRIER_BITS);
 		}
-		
-		GLTimerQueries::timestamp("compute-loop-end");
 	}
-
 
 };

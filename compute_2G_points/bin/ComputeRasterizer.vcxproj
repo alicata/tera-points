@@ -146,7 +146,6 @@
     <ClCompile Include="..\libs\glew\glew.c" />
     <ClCompile Include="..\src\data\point_clouds_loader.cpp" />
     <ClCompile Include="..\src\Framebuffer.cpp" />
-    <ClCompile Include="..\src\GLTimerQueries.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\OrbitControls.cpp" />
     <ClCompile Include="..\src\Renderer.cpp" />
@@ -160,7 +159,6 @@
     <ClInclude Include="..\include\drawBoxes.h" />
     <ClInclude Include="..\include\Framebuffer.h" />
     <ClInclude Include="..\include\Frustum.h" />
-    <ClInclude Include="..\include\GLTimerQueries.h" />
     <ClInclude Include="..\include\Plane.h" />
     <ClInclude Include="..\include\ProgressiveFileBuffer.h" />
     <ClInclude Include="..\include\Renderer.h" />
