@@ -2,36 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="..\libs\imgui\imgui.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\imgui\imgui_demo.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\imgui\imgui_draw.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\imgui\backends\imgui_impl_glfw.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\imgui\backends\imgui_impl_opengl3.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\imgui\imgui_tables.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\imgui\imgui_widgets.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\implot\implot.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\implot\implot_demo.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\libs\implot\implot_items.cpp">
-      <Filter>imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\include\unsuck_platform_specific.cpp">
       <Filter>source</Filter>
     </ClCompile>
@@ -58,18 +28,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\libs\imgui\backends\imgui_impl_glfw.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\libs\imgui\backends\imgui_impl_opengl3.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\libs\implot\implot.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\libs\implot\implot_internal.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\unsuck.hpp">
       <Filter>source</Filter>
     </ClInclude>
@@ -125,9 +83,6 @@
   <ItemGroup>
     <Filter Include="source">
       <UniqueIdentifier>{651d2ed3-853f-4f6a-be44-dd3081acc780}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="imgui">
-      <UniqueIdentifier>{4b02947d-638b-4a6e-a176-4a4abe0d9b5e}</UniqueIdentifier>
     </Filter>
     <Filter Include="headers">
       <UniqueIdentifier>{6f062ce5-ad70-48c3-a47b-efec6e18e88d}</UniqueIdentifier>

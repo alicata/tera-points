@@ -39,20 +39,14 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 }
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos){
-	ImGuiIO& io = ImGui::GetIO();
-	if(io.WantCaptureMouse){
-		return;
-	}
+ 
 	
 	Runtime::mousePosition = {xpos, ypos};
 	_controls->onMouseMove(xpos, ypos);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
-	ImGuiIO& io = ImGui::GetIO();
-	if(io.WantCaptureMouse){
-		return;
-	}
+ 
 	_controls->onMouseScroll(xoffset, yoffset);
 }
 
@@ -60,10 +54,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
 	cout << "start button: " << button << ", action: " << action << ", mods: " << mods << endl;
 
-	ImGuiIO& io = ImGui::GetIO();
-	if(io.WantCaptureMouse){
-		return;
-	}
+ 
 	cout << "end button: " << button << ", action: " << action << ", mods: " << mods << endl;
 
 	if(action == 1){
@@ -86,23 +77,6 @@ Renderer::Renderer(){
 	view2.framebuffer = this->createFramebuffer(128, 128);
 	views.push_back(view1);
 	views.push_back(view2);
-}
-
-void init_gui(Renderer* renderer) {
-	{ // SETUP IMGUI
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImPlot::CreateContext();
-		ImGuiIO& io = ImGui::GetIO();
-		ImGui_ImplGlfw_InitForOpenGL(renderer->window, true);
-		ImGui_ImplOpenGL3_Init("#version 450");
-		ImGui::StyleColorsDark();
-	}
-}
-
-void destroy_gui(void) {
-	ImPlot::DestroyContext();
-	ImGui::DestroyContext();
 }
 
 
@@ -155,7 +129,6 @@ void Renderer::init(){
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_HIGH, 0, NULL, GL_TRUE);
 	glDebugMessageCallback(debugCallback, NULL);
 
-	init_gui(this);
 }
 
 shared_ptr<Texture> Renderer::createTexture(int width, int height, GLuint colorType) {
@@ -173,72 +146,6 @@ shared_ptr<Framebuffer> Renderer::createFramebuffer(int width, int height) {
 	return framebuffer;
 }
 
-void render_gui(Renderer * renderer) {
-	// IMGUI
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplGlfw_NewFrame();
-	ImGui::NewFrame();
-
-	shared_ptr<OrbitControls> controls = renderer->controls;
-	vector<View>& views = renderer->views;
-
-	{ // RENDER IMGUI INPUT
-		auto windowSize_debug = ImVec2(490, 200);
-		ImGui::SetNextWindowPos(ImVec2(
-			10,
-			30));
-		ImGui::SetNextWindowSize(windowSize_debug);
-
-		ImGui::Begin("Debug Visualization");
-		{
-			bool checked;
-
-
-			checked = Debug::showBoundingBox;
-			ImGui::Checkbox("show bounding box", &checked);
-			Debug::showBoundingBox = checked;
-
-			checked = Debug::colorizeChunks;
-			ImGui::Checkbox("colorize chunks", &checked);
-			Debug::colorizeChunks = checked;
-		}
-
-		if (ImGui::Button("copy camera")) {
-			auto pos = controls->getPosition();
-			auto target = controls->target;
-
-			stringstream ss;
-			ss << std::setprecision(2) << std::fixed;
-			ss << "position: " << pos.x << ", " << pos.y << ", " << pos.z << endl;
-			ss << "renderer->controls->yaw = " << controls->yaw << ";" << endl;
-			ss << "renderer->controls->pitch = " << controls->pitch << ";" << endl;
-			ss << "renderer->controls->radius = " << controls->radius << ";" << endl;
-			ss << "renderer->controls->target = {" << target.x << ", " << target.y << ", " << target.z << "};" << endl;
-
-			string str = ss.str();
-			toClipboard(str);
-		}
-
-		if (ImGui::Button("reset view")) {
-			Debug::requestResetView = true;
-		}
-		ImGui::End();
-	}
-
-	{
-		auto source = views[0].framebuffer;
-		glBlitNamedFramebuffer(
-			source->handle, 0,
-			0, 0, source->width, source->height,
-			0, 0, 0 + source->width, 0 + source->height,
-			GL_COLOR_BUFFER_BIT, GL_LINEAR);
-	}
-
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-
-}
 
 void Renderer::loop(function<void(void)> update, function<void(void)> render){
 
@@ -282,13 +189,18 @@ void Renderer::loop(function<void(void)> update, function<void(void)> render){
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 			glViewport(0, 0, this->width, this->height);
 		}
-		render_gui(this);
+
+		//render to frame buffer
+		auto source = views[0].framebuffer;
+		glBlitNamedFramebuffer(
+			source->handle, 0,
+			0, 0, source->width, source->height,
+			0, 0, 0 + source->width, 0 + source->height,
+			GL_COLOR_BUFFER_BIT, GL_LINEAR);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
-	destroy_gui();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

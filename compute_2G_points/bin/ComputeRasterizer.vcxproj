@@ -144,16 +144,6 @@
   <ItemGroup>
     <ClCompile Include="..\include\unsuck_platform_specific.cpp" />
     <ClCompile Include="..\libs\glew\glew.c" />
-    <ClCompile Include="..\libs\imgui\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="..\libs\imgui\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="..\libs\imgui\imgui.cpp" />
-    <ClCompile Include="..\libs\imgui\imgui_demo.cpp" />
-    <ClCompile Include="..\libs\imgui\imgui_draw.cpp" />
-    <ClCompile Include="..\libs\imgui\imgui_tables.cpp" />
-    <ClCompile Include="..\libs\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="..\libs\implot\implot.cpp" />
-    <ClCompile Include="..\libs\implot\implot_demo.cpp" />
-    <ClCompile Include="..\libs\implot\implot_items.cpp" />
     <ClCompile Include="..\src\data\point_clouds_loader.cpp" />
     <ClCompile Include="..\src\Framebuffer.cpp" />
     <ClCompile Include="..\src\GLTimerQueries.cpp" />
@@ -177,10 +167,6 @@
     <ClInclude Include="..\include\Shader.h" />
     <ClInclude Include="..\include\Texture.h" />
     <ClInclude Include="..\include\unsuck.hpp" />
-    <ClInclude Include="..\libs\imgui\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="..\libs\imgui\backends\imgui_impl_opengl3.h" />
-    <ClInclude Include="..\libs\implot\implot.h" />
-    <ClInclude Include="..\libs\implot\implot_internal.h" />
     <ClInclude Include="..\src\compute\compute_loop.h" />
     <ClInclude Include="..\src\data\point_clouds_loader.h" />
     <ClInclude Include="..\src\data\Resources.h" />
