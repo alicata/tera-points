@@ -14,7 +14,7 @@ This code project implements a real-time GPU rasterization system for point clou
 ## What's good for
 Some of the features of the current code:
 * rendering arbitrarily large point clouds.
-* load from large file 
+* load from large file (LAS)
 
 ## Setup
 * VisualStudio 2022 (C++)
@@ -25,7 +25,10 @@ Some of the features of the current code:
 The starting code is based on agressive simplication (for easy experimentation) modifications from the original paper and code "Software Rasterization of 2 Billion Points in Real Time" https://arxiv.org/abs/2204.01287. 
  
 ## Future Plans
-Sub-project compute_2G_points is focused on billion points, but future version will target trillion points.
+* expand compute_2G_points from 2 billion points to handle trillion points (using 4GB GPU VRAM)
+* load from .obj wavefront and other common fileformats
+* allow accumulating data loaded from separate files.
+*
 
 
 
