@@ -1,23 +1,26 @@
-# tera-points
-Research into billion/trillion point renderer from depth / LiDAR sensors data
+# Tera-points
+Research into accellerated billion-to-trillion point renderer from 3d sensor or synthetic sample data.
 
-## goal
-Create cleaner and easier to hack research source code in GPU accelerated sensor point cloud rendering.
+## Overview
+This code project implements a real-time GPU rasterization system for point clouds up to 100 times more performant than GL_POINTS, achieved through optimizations such as utilizing 
+* compute shader
+* grouping points into batches
+* employing adaptive precision techniques
 
-## additonal credit
-The starting point of this code base is a rewrite of the original https://arxiv.org/abs/2204.01287. 
-Sub-project compute_2G_points is focused on billion points, but future version might target trillion points.
+## Principle
+1. The compute shader transforms points into screen space, each pixel has depth and color information packed into a single 64-bit integer.
+2. Use AtomicMin to determine the closest point for each pixel.
 
-## description
-A GPU compute shader rasterization pipeline for point clouds that can render up to two billion points in real-time at 60fps.
-The improvements are achieved by batching points in a way that a number of batch-level optimizations can be computed before rasterizing the points within the same rendering pass.
+## What's good for
+Some of the features of the current code:
+* rendering arbitrarily large point clouds.
+* load from large file 
 
-This approach is suitable for rendering arbitrarily large point clouds.
-
-The pipeline also supports frustum culling and LOD rendering.
-
-
-
+## Credit
+The starting code is based on agressive simplication (for easy experimentation) modifications from the original paper and code "Software Rasterization of 2 Billion Points in Real Time" https://arxiv.org/abs/2204.01287. 
+ 
+## Future Plans
+Sub-project compute_2G_points is focused on billion points, but future version will target trillion points.
 
 
 
