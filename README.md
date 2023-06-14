@@ -6,7 +6,7 @@ This code project implements a real-time GPU rasterization system for point clou
 * compute shader
 * grouping points into batches
 * employing adaptive precision techniques
-
+	
 ## Principle
 1. The compute shader transforms points into screen space, each pixel has depth and color information packed into a single 64-bit integer.
 2. Use AtomicMin to determine the closest point for each pixel.
@@ -31,10 +31,4 @@ The starting code is based on agressive simplication (for easy experimentation) 
 * load from .obj wavefront and other common fileformats
 * allow accumulating data loaded from separate files.
 *
-
-
-
-
-
-
 
