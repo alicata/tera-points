@@ -1,6 +1,8 @@
 # Tera-points
 Research into accellerated billion-to-trillion point renderer from 3d sensor or synthetic sample data.
 
+![2G](https://github.com/alicata/tera-points/blob/main/2G_Renderer.png)
+
 ## Overview
 This code project implements a real-time GPU rasterization system for point clouds up to 100 times more performant than GL_POINTS, achieved through optimizations such as utilizing 
 * compute shader
