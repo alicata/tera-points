@@ -21,7 +21,7 @@ Some of the features of the current code:
 * Install VisualStudio 2022 (C++)
 * Navigate to bin and open Compute_2G_Points.sln
 * Build solution (Release, x64)
-* Place a LAS file in path d:/data/test.las
+* Place and rename a LAS file in path tera_points/test.las
 
 ## Credit
 The starting code is based on agressive simplication (for easy experimentation) modifications from the original paper and code "Software Rasterization of 2 Billion Points in Real Time" https://arxiv.org/abs/2204.01287. 

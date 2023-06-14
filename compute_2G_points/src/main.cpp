@@ -4,7 +4,7 @@
 	2. build solution
 	3. run Local Window Debugger
 	4. download las files from https://github.com/PDAL/data/tree/master/workshop
-	5. rename las to test.las in D:\data
+	5. rename las to test.las and move to top-level tera-points folder.
 
 	TODO:
 	1. add CUDA
@@ -55,7 +55,7 @@ void init_debug(void) {
 
 shared_ptr<PointCloudLoader> load_point_clouds(shared_ptr<Renderer> renderer) {
 	auto point_clouds = make_shared<PointCloudLoader>(renderer);
-	vector<string> lasfiles = { "d:\\data\\test.las" };
+	vector<string> lasfiles = { "..\\test.las" };
 
 	point_clouds->add(lasfiles, [renderer](vector<shared_ptr<PointCloud>> lasfiles) {} );
 	return point_clouds;
