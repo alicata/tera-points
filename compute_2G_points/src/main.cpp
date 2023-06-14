@@ -1,8 +1,10 @@
-/*
+/*  2G Renderer app
+
     1. select Release x64
 	2. build solution
 	3. run Local Window Debugger
-	4. drag n drop test.las
+	4. download las files from https://github.com/PDAL/data/tree/master/workshop
+	5. rename las to test.las in D:\data
 
 	TODO:
 	1. add CUDA
